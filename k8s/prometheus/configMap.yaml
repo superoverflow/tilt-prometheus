@@ -8,7 +8,7 @@ metadata:
 data:
   prometheus.rules: |-
     groups:
-    - name: demo alert
+    - name: demo alerts
       rules:
       - alert: High Pod Memory
         expr: sum(container_memory_usage_bytes) > 1
@@ -17,8 +17,17 @@ data:
           severity: critical
         annotations:
           summary: High Memory Usage
-      - alert: CPU not idle
+    - name: CPU
+      rules:
+      - alert: CPU idle warning
         expr: node_cpu_seconds_total{cpu="0", mode="idle"} > 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: CPU is not idle
+      - alert: CPU idle critical
+        expr: node_cpu_seconds_total{cpu="0", mode="idle"} > 1000
         for: 1m
         labels:
           severity: critical
