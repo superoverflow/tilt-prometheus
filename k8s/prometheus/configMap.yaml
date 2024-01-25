@@ -34,6 +34,7 @@ data:
         annotations:
           summary: CPU is not idle
 
+
   prometheus.yml: |-
     global:
       scrape_interval: 5s
@@ -53,4 +54,11 @@ data:
         relabel_configs:
         - source_labels: [__meta_kubernetes_endpoints_name]
           regex: 'node-exporter'
+          action: keep
+      - job_name: 'postgres-exporter'
+        kubernetes_sd_configs:
+          - role: endpoints
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_endpoints_name]
+          regex: 'postgres-exporter'
           action: keep
