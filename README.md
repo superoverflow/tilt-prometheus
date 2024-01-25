@@ -2,4 +2,4 @@ This repo is trying to model prometheus/alertmanager/grafana setup with [Tilt](h
 
 --
 # Reference:
-* https://github.com/bibinwilson/kubernetes-alert-manager
+* https://github.com/techiescamp/kubernetes-prometheus
