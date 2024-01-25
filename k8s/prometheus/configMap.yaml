@@ -33,7 +33,22 @@ data:
           severity: critical
         annotations:
           summary: CPU is not idle
-
+    - name: Postgres
+      rules:
+      - alert: Postgres Down
+        expr: pg_up == 0
+        for: 5s
+        labels:
+          severity: critical
+        annotations:
+          summary: Postgres is down
+      - alert: Postgres High Connections
+        expr: pg_stat_activity_count{usename="postgres", state="active"} > 0
+        for: 5s
+        labels:
+          severity: warning
+        annotations:
+          summary: Postgres has high connections
 
   prometheus.yml: |-
     global:
