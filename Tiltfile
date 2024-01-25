@@ -9,7 +9,6 @@ k8s_yaml([
 ])
 k8s_resource('prometheus-deployment', port_forwards=[9090])
 
-
 print('setup alertmanager')
 k8s_yaml([
     "k8s/alertmanager/configmap.yaml",
@@ -17,3 +16,18 @@ k8s_yaml([
     "k8s/alertmanager/service.yaml"
 ])
 k8s_resource('alertmanager', port_forwards=[9093])
+
+print('setup grafana')
+k8s_yaml([
+    "k8s/grafana/configmap.yaml",
+    "k8s/grafana/deployment.yaml", 
+    "k8s/grafana/service.yaml"
+])
+k8s_resource('grafana', port_forwards=[3000])
+
+print('setup node-exporter')
+k8s_yaml([
+    "k8s/node-exporter/daemonset.yaml",
+    "k8s/node-exporter/service.yaml"
+])
+k8s_resource('node-exporter', port_forwards=[9100])
