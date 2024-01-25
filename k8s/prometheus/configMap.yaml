@@ -8,15 +8,23 @@ metadata:
 data:
   prometheus.rules: |-
     groups:
-    - name: devopscube demo alert
+    - name: demo alert
       rules:
       - alert: High Pod Memory
         expr: sum(container_memory_usage_bytes) > 1
         for: 1m
         labels:
-          severity: slack
+          severity: critical
         annotations:
           summary: High Memory Usage
+      - alert: CPU not idle
+        expr: node_cpu_seconds_total{cpu="0", mode="idle"} > 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: CPU is not idle
+
   prometheus.yml: |-
     global:
       scrape_interval: 5s
