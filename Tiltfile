@@ -1,6 +1,7 @@
 load('ext://namespace', 'namespace_create', 'namespace_inject')
 load('ext://deployment', 'deployment_create')
 load('ext://configmap', 'configmap_from_dict')
+allow_k8s_contexts(['docker-desktop', 'colima'])
 
 namespace_create('monitoring')
 namespace_create('database')
