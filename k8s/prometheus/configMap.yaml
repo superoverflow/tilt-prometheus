@@ -75,5 +75,5 @@ data:
           - role: endpoints
         relabel_configs:
         - source_labels: [__meta_kubernetes_endpoints_name]
-          regex: 'postgres-exporter'
+          regex: 'postgres-exporter-\d+'
           action: keep
